@@ -5,7 +5,8 @@
 // plain `ln -s`). /sync finds every git repo those symlinks point into, then for each:
 //   git pull --rebase --autostash   (stops without reloading on failure)
 //   git push                        (only if there are local commits)
-// warns about uncommitted files, and finally reloads pi so the changes take effect.
+// warns about uncommitted files, updates installed packages (`pi update --extensions`, so the
+// packages in settings.json are installed and current), and finally reloads pi so the changes take effect.
 //
 // Agents can't reload pi (ctx.reload is command-only), so the intended loop is:
 // agent edits + commits + pushes, you type /sync on each machine.
@@ -90,6 +91,14 @@ export default function (pi: ExtensionAPI) {
 				if (dirty) warn = true;
 				report.push(dirty ? `${repo} at ${head}. Uncommitted (not synced):\n${dirty}` : `${repo} at ${head}, clean.`);
 			}
+
+			// packages (settings.json `packages`): install new ones, update the rest. Run with this pi's own node and
+			// script, so it works where `pi` isn't on PATH (an fnm install, a non-login shell)
+			const update = await pi.exec(process.execPath, [process.argv[1], "update", "--extensions"], { timeout: 300_000 });
+			if (update.code !== 0) {
+				warn = true;
+				report.push(`packages: pi update --extensions failed:\n${(update.stderr || update.stdout).trim().split("\n").slice(-5).join("\n")}`);
+			} else report.push("packages: updated.");
 
 			ctx.ui.notify(`sync: ${report.join("\n")}\nReloading.`, warn ? "warning" : "info");
 			await ctx.reload();

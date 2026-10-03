@@ -10,7 +10,8 @@ For people who keep `~/.pi/agent` files (`AGENTS.md`, `settings.json`, `extensio
 2. For each repo, runs `git pull --rebase --autostash`. If that fails, it stops and does not reload.
 3. Pushes any local commits.
 4. Warns about uncommitted files, which won't reach your other machines.
-5. Reloads Pi so new extensions, skills, instructions and settings take effect.
+5. Updates installed packages (`pi update --extensions`): packages added to `settings.json` get installed, the rest updated.
+6. Reloads Pi so new extensions, skills, instructions and settings take effect.
 
 The summary is shown just before the reload, so it may be cleared from the screen once the reload finishes.
 
