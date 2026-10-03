@@ -1,0 +1,22 @@
+{
+  "name": "@aliceisjustplaying/pi-sync",
+  "version": "0.1.0",
+  "description": "/sync for Pi: pull and push the git repo your pi config is symlinked from, then reload",
+  "private": true,
+  "license": "MIT",
+  "repository": "github:aliceisjustplaying/pi-sync",
+  "type": "module",
+  "keywords": ["pi-package", "pi-extension", "dotfiles", "sync"],
+  "files": ["index.ts", "README.md", "LICENSE"],
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json"
+  },
+  "pi": {
+    "extensions": ["./index.ts"]
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "^0.84.1",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.9.3"
+  }
+}
