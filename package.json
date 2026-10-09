@@ -6,17 +6,28 @@
   "license": "MIT",
   "repository": "github:aliceisjustplaying/pi-sync",
   "type": "module",
-  "keywords": ["pi-package", "pi-extension", "dotfiles", "sync"],
-  "files": ["index.ts", "README.md", "LICENSE"],
+  "keywords": [
+    "pi-package",
+    "pi-extension",
+    "dotfiles",
+    "sync"
+  ],
+  "files": [
+    "index.ts",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "typecheck": "tsc -p tsconfig.json"
   },
   "pi": {
-    "extensions": ["./index.ts"]
+    "extensions": [
+      "./index.ts"
+    ]
   },
   "devDependencies": {
-    "@earendil-works/pi-coding-agent": "^0.84.1",
-    "@types/node": "^24.0.0",
-    "typescript": "^5.9.3"
+    "@earendil-works/pi-coding-agent": "^1.1.0",
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2"
   }
 }
